@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kes_health/core/constants/colors.dart';
+import 'package:kes_health/core/routing/app_router.dart';
 import 'package:kes_health/pages/authentification/components/cardauth.dart';
 
 @RoutePage()
@@ -32,6 +33,7 @@ class AuthPage extends StatelessWidget {
             context.router.pop();
           },
         ),
+        centerTitle: true,
         ),
        
       
@@ -61,7 +63,7 @@ class AuthPage extends StatelessWidget {
               buttonText: 'S\'inscrire',
               buttonColor: AppColors.primaryBlue,
               onButtonPressed: () {
-                // Ajouter votre logique de navigation ici
+                context.router.push(const InscriptionRoute());
               },
               margin: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
             ),
@@ -74,7 +76,7 @@ class AuthPage extends StatelessWidget {
               buttonText: 'Se connecter',
               buttonColor: AppColors.warningYellow,
               onButtonPressed: () {
-                // Ajouter votre logique de navigation ici
+                context.router.push(const ConnexionRoute());
               },
               margin: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
             ),

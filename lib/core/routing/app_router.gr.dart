@@ -33,10 +33,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ComptePage(),
       );
     },
+    ConnexionRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ConnexionPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const HomePage(),
+      );
+    },
+    InscriptionRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const InscriptionPage(),
       );
     },
     MessagesRoute.name: (routeData) {
@@ -109,6 +121,20 @@ class CompteRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ConnexionPage]
+class ConnexionRoute extends PageRouteInfo<void> {
+  const ConnexionRoute({List<PageRouteInfo>? children})
+      : super(
+          ConnexionRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ConnexionRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -118,6 +144,20 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [InscriptionPage]
+class InscriptionRoute extends PageRouteInfo<void> {
+  const InscriptionRoute({List<PageRouteInfo>? children})
+      : super(
+          InscriptionRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'InscriptionRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -34,7 +34,7 @@ class ComptePage extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {
-              // Action à effectuer lors du tap sur l'icône d'aide
+              context.router.push(const ConnexionRoute());
             },
             child: Row(
               children: [
@@ -66,7 +66,7 @@ class ComptePage extends StatelessWidget {
                 buttonColor: AppColors.primaryBlue,
                 buttonText: 'Se connecter',
                 onButtonPressed: () => {
-                  context.router.push(const AuthRoute())
+                  context.router.push(const ConnexionRoute())
                 },
               ),
               SizedBox(height: screenHeight * 0.02),
@@ -86,8 +86,7 @@ class ComptePage extends StatelessWidget {
                   SizedBox(width: screenWidth * 0.02),
                   GestureDetector(
                     onTap: () {
-                      // Action à effectuer lors du tap sur "S'inscrire"
-                      context.router.push( const AuthRoute());
+                      context.router.push(const InscriptionRoute());
                     },
                     child: Text(
                       'S\'inscrire',

@@ -11,7 +11,6 @@ import 'package:kes_health/pages/accueil/components/card.dart';
 import 'package:kes_health/core/components/infocard.dart';
 import 'package:kes_health/pages/accueil/components/infotext.dart';
 import 'package:kes_health/core/components/roundedbouton.dart';
-import 'package:toastification/toastification.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -38,7 +37,7 @@ class HomePage extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {
-              context.router.push(const AuthRoute());
+              context.router.push(const ConnexionRoute());
             },
             child: Row(
               children: [
@@ -91,7 +90,7 @@ class HomePage extends StatelessWidget {
                     // Contenu
                     Padding(
                       padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top + 4),
+                          top: MediaQuery.of(context).padding.top + 32),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

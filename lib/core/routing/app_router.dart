@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:kes_health/pages/accueil/accueil.dart';
 import 'package:kes_health/pages/authentification/authentification.dart';
+import 'package:kes_health/pages/authentification/connexion/connexion.dart';
+import 'package:kes_health/pages/authentification/inscription/inscription.dart';
 import 'package:kes_health/pages/carrousel_slider/carrousel_slider.dart';
 import 'package:kes_health/pages/compte/compte.dart';
 import 'package:kes_health/pages/messages/messages.dart';
@@ -22,5 +24,7 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: NavigationRoute.page),
     AutoRoute(page: RendezVousRoute.page),
     AutoRoute(page: SanteRoute.page),
+    AutoRoute(page: InscriptionRoute.page),
+    AutoRoute(page: ConnexionRoute.page),
   ];
 }

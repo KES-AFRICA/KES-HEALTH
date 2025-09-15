@@ -41,6 +41,7 @@ dependencies:
   animated_bottom_navigation_bar: ^1.4.0
   auto_route: ^8.1.4
   toastification: ^3.0.3
+  animations: ^2.0.11
 
 dev_dependencies:
   auto_route_generator: ^8.0.0

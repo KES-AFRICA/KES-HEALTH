@@ -48,7 +48,7 @@ class MessagesPage extends StatelessWidget {
               text: 'Se connecter', 
               color: AppColors.primaryBlue, 
               onPressed: (){
-                context.router.push(const AuthRoute());
+                context.router.push(const ConnexionRoute());
               }
             )
           ],
