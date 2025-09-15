@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:kes_health/core/constants/texte.dart';
 import 'package:kes_health/core/constants/colors.dart'; // Import des couleurs
-import 'package:kes_health/pages/accueil/accueil.dart';
-import 'package:kes_health/pages/carrousel_slider/carrousel_slider.dart';
-import 'package:kes_health/pages/navigations/navigation.dart';
+import 'package:kes_health/core/routing/app_router.dart';
+import 'package:toastification/toastification.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final _appRouter = AppRouter();
+
+  MyApp({super.key,});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: AppTexts.appName,
+      routerConfig: _appRouter.config(),
       theme: ThemeData(
         // Utilisation de nos constantes de couleurs AppColors
         colorScheme: ColorScheme.fromSeed(
@@ -32,20 +34,20 @@ class MyApp extends StatelessWidget {
           onBackground: AppColors.textPrimary,
         ),
         useMaterial3: true,
-        
+
         // Configuration de l'AppBar avec nos couleurs
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.primaryBlue,
           foregroundColor: AppColors.white,
           elevation: 2,
           shadowColor: AppColors.shadowLight,
-          titleTextStyle:  TextStyle(
+          titleTextStyle: TextStyle(
             color: AppColors.white,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
         ),
-        
+
         // Configuration des boutons avec nos couleurs
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -63,7 +65,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        
+
         // Configuration des boutons de texte
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
@@ -74,7 +76,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        
+
         // Configuration des boutons outline
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
@@ -86,7 +88,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        
+
         // Configuration des champs de texte
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
@@ -99,7 +101,8 @@ class MyApp extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: AppColors.primaryBlue, width: 2),
+            borderSide:
+                const BorderSide(color: AppColors.primaryBlue, width: 2),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
@@ -111,11 +114,12 @@ class MyApp extends StatelessWidget {
           ),
           fillColor: AppColors.white,
           filled: true,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
-        
+
         // Configuration des cartes
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: AppColors.white,
           shadowColor: AppColors.shadowLight,
           elevation: 2,
@@ -124,7 +128,7 @@ class MyApp extends StatelessWidget {
           ),
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
-        
+
         // Configuration de la BottomNavigationBar
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: AppColors.white,
@@ -133,7 +137,7 @@ class MyApp extends StatelessWidget {
           elevation: 8,
           type: BottomNavigationBarType.fixed,
         ),
-        
+
         // Configuration des FloatingActionButton
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: AppColors.primaryBlue,
@@ -141,7 +145,7 @@ class MyApp extends StatelessWidget {
           elevation: 6,
           shape: CircleBorder(),
         ),
-        
+
         // Configuration des SnackBar
         snackBarTheme: SnackBarThemeData(
           backgroundColor: AppColors.darkBlue,
@@ -151,31 +155,44 @@ class MyApp extends StatelessWidget {
           ),
           behavior: SnackBarBehavior.floating,
         ),
-        
+
         // Configuration des dividers
         dividerTheme: const DividerThemeData(
           color: AppColors.borderLight,
           thickness: 1,
         ),
-        
+
         // Configuration du texte général
         textTheme: const TextTheme(
-          headlineLarge: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
-          headlineMedium: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
-          headlineSmall: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w600),
-          titleLarge: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w600),
-          titleMedium: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w500),
-          titleSmall: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w500),
+          headlineLarge: TextStyle(
+              color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+          headlineMedium: TextStyle(
+              color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+          headlineSmall: TextStyle(
+              color: AppColors.textPrimary, fontWeight: FontWeight.w600),
+          titleLarge: TextStyle(
+              color: AppColors.textPrimary, fontWeight: FontWeight.w600),
+          titleMedium: TextStyle(
+              color: AppColors.textPrimary, fontWeight: FontWeight.w500),
+          titleSmall: TextStyle(
+              color: AppColors.textPrimary, fontWeight: FontWeight.w500),
           bodyLarge: TextStyle(color: AppColors.textPrimary),
           bodyMedium: TextStyle(color: AppColors.textPrimary),
           bodySmall: TextStyle(color: AppColors.textSecondary),
         ),
       ),
-      
-      // Page d'accueil : Carrousel
-      home: const Carroussel(),
-      //home: const NavigationScreen(),
-      
+            /// Ici on insère Toastification au-dessus de toutes les pages
+      builder: (context, child) {
+        return ToastificationConfigProvider(
+          config: const ToastificationConfig(
+            alignment: Alignment.center,
+            itemWidth: 440,
+            animationDuration: Duration(milliseconds: 400),
+            blockBackgroundInteraction: false,
+          ),
+          child: child!,
+        );
+      },
     );
   }
 }

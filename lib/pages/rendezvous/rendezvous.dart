@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kes_health/core/components/infocard.dart';
 import 'package:kes_health/core/constants/colors.dart';
-import 'package:kes_health/pages/accueil/components/roundedbouton.dart';
+import 'package:kes_health/core/components/roundedbouton.dart';
+import 'package:kes_health/core/routing/app_router.dart';
 
+@RoutePage()
 class RendezVousPage extends StatelessWidget {
   const RendezVousPage({super.key});
 
@@ -44,7 +47,9 @@ class RendezVousPage extends StatelessWidget {
             RoundedButton(
               text: 'Se connecter', 
               color: AppColors.primaryBlue, 
-              onPressed: (){}
+              onPressed: (){
+                context.router.push(const AuthRoute());
+              }
             )
           ],
         ),

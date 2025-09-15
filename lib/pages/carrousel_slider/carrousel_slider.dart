@@ -1,21 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kes_health/core/constants/colors.dart';
 import 'package:kes_health/core/constants/texte.dart';
-import 'package:kes_health/pages/accueil/accueil.dart';
+import 'package:kes_health/core/routing/app_router.dart';
 import 'dart:async';
-
 import 'package:kes_health/pages/carrousel_slider/components/Slide.dart';
-import 'package:kes_health/pages/navigations/navigation.dart';
 
-class Carroussel extends StatefulWidget {
-  const Carroussel({super.key});
+@RoutePage()
+class CarrousselPage extends StatefulWidget {
+  const CarrousselPage({super.key});
 
   @override
-  State<Carroussel> createState() => _CarrousselState();
+  State<CarrousselPage> createState() => _CarrousselPageState();
 }
 
-class _CarrousselState extends State<Carroussel> with TickerProviderStateMixin {
+class _CarrousselPageState extends State<CarrousselPage> with TickerProviderStateMixin {
   late PageController _pageController;
   late Timer _timer;
   late List<AnimationController> _progressControllers;
@@ -190,7 +190,7 @@ class _CarrousselState extends State<Carroussel> with TickerProviderStateMixin {
                   // Nom de l'application (Poppins)
                   Text(
                     AppTexts.appName,
-                    style: GoogleFonts.pacifico(
+                    style: GoogleFonts.poppins(
                       fontSize: screenWidth * 0.08,
                       fontWeight: FontWeight.w700,
                       color: AppColors.primaryBlue,
@@ -270,11 +270,8 @@ class _CarrousselState extends State<Carroussel> with TickerProviderStateMixin {
                       height: screenHeight * 0.065,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Navigation vers la page d'accueil (même action)
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const NavigationScreen()),
-                          );
+                        // Navigation vers la page d'accueil (même action)
+                        context.router.replaceAll([const NavigationRoute()]);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryBlue,
@@ -298,13 +295,10 @@ class _CarrousselState extends State<Carroussel> with TickerProviderStateMixin {
 
                     // Bouton secondaire
                     TextButton(
-                      onPressed: () {
+                        onPressed: () {
                         // Navigation vers la page d'accueil (même action)
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const NavigationScreen()),
-                          );
-                      },
+                        context.router.replaceAll([const NavigationRoute()]);
+                        },
                       child: Text(
                         AppTexts.skipIntro,
                         style: GoogleFonts.poppins(

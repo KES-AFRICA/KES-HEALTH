@@ -1,14 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kes_health/core/components/custom_toast.dart';
 import 'package:kes_health/core/constants/colors.dart';
 import 'package:kes_health/core/constants/texte.dart';
+import 'package:kes_health/core/routing/app_router.dart';
 import 'package:kes_health/pages/accueil/components/calltoactioncard.dart';
 import 'package:kes_health/pages/accueil/components/card.dart';
 import 'package:kes_health/core/components/infocard.dart';
 import 'package:kes_health/pages/accueil/components/infotext.dart';
-import 'package:kes_health/pages/accueil/components/roundedbouton.dart';
+import 'package:kes_health/core/components/roundedbouton.dart';
+import 'package:toastification/toastification.dart';
 
+@RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -18,6 +23,39 @@ class HomePage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          AppTexts.appNameShort,
+          style: GoogleFonts.poppins(
+            color: AppColors.white,
+            fontSize: screenWidth * 0.06,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        backgroundColor: AppColors.primaryBlue,
+        elevation: 0,
+        foregroundColor: AppColors.primaryBlue,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              context.router.push(const AuthRoute());
+            },
+            child: Row(
+              children: [
+                Text(
+                  AppTexts.login,
+                  style: GoogleFonts.poppins(
+                    color: AppColors.white,
+                    fontSize: screenWidth * 0.04,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(width: 12),
+              ],
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Container(
           color: AppColors.white,
@@ -25,7 +63,7 @@ class HomePage extends StatelessWidget {
             children: [
               // Premier container avec fond bleu
               Container(
-                height: screenHeight * 0.4,
+                height: screenHeight * 0.30,
                 decoration: const BoxDecoration(
                   color: AppColors.primaryBlue,
                   borderRadius: BorderRadius.only(
@@ -53,42 +91,10 @@ class HomePage extends StatelessWidget {
                     // Contenu
                     Padding(
                       padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top + 16),
+                          top: MediaQuery.of(context).padding.top + 4),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Nom app + connexion
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: screenWidth * 0.05),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  AppTexts.appNameShort,
-                                  style: GoogleFonts.pacifico(
-                                    color: AppColors.white,
-                                    fontSize: screenWidth * 0.06,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    AppTexts.login,
-                                    style: GoogleFonts.poppins(
-                                      color: AppColors.white,
-                                      fontSize: screenWidth * 0.04,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          SizedBox(height: screenHeight * 0.05),
-
                           // Slogan
                           Padding(
                             padding: EdgeInsets.symmetric(
@@ -105,7 +111,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
 
-                          SizedBox(height: screenHeight * 0.05),
+                          SizedBox(height: screenHeight * 0.02),
 
                           // Barre de recherche
                           Padding(
@@ -209,7 +215,14 @@ class HomePage extends StatelessWidget {
               RoundedButton(
                 text: 'Vous êtes soignant ?',
                 color: AppColors.darkBlue,
-                onPressed: () {},
+                onPressed: () {
+                  // Toast d'avertissement
+                  CustomToast.warning(
+                    context: context,
+                    title: 'Non disponible',
+                    description: 'Fonctionnalité en cours de développement.',
+                  );
+                },
               ),
 
               SizedBox(height: screenHeight * 0.02),
@@ -227,7 +240,9 @@ class HomePage extends StatelessWidget {
                   textAlign: TextAlign.center, // <--- centrage
                 ),
               ),
+
               SizedBox(height: screenHeight * 0.02),
+
               InfoCard(
                 svgPath: 'assets/icons/svg/calendrier2.svg',
                 title: 'Accédez aux soins plus facilement',
@@ -255,6 +270,7 @@ class HomePage extends StatelessWidget {
                 screenHeight: screenHeight,
               ),
               SizedBox(height: screenHeight * 0.08),
+
               //statistiquue
               SizedBox(
                 child: Row(
@@ -262,7 +278,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     Text(
                       AppTexts.appName,
-                      style: GoogleFonts.pacifico(
+                      style: GoogleFonts.poppins(
                         color: AppColors.darkBlue,
                         fontSize: screenWidth * 0.06,
                         fontWeight: FontWeight.w700,
@@ -316,7 +332,11 @@ class HomePage extends StatelessWidget {
                 buttonText: 'Découvrir nos engagements',
                 buttonColor: Colors.blue, // OBLIGATOIRE
                 onButtonPressed: () => {
-                  // action du bouton
+                  CustomToast.warning(
+                    context: context,
+                    title: 'Non disponible',
+                    description: 'Fonctionnalité en cours de développement.',
+                  )
                 },
                 elementOrder: const [
                   CardElementType.image,
@@ -337,7 +357,11 @@ class HomePage extends StatelessWidget {
                 buttonText: 'En savoir plus',
                 buttonColor: Colors.blue, // OBLIGATOIRE
                 onButtonPressed: () => {
-                  // action du bouton
+                  CustomToast.warning(
+                    context: context,
+                    title: 'Non disponible',
+                    description: 'Fonctionnalité en cours de développement.',
+                  )
                 },
                 elementOrder: const [
                   CardElementType.image,
@@ -358,7 +382,11 @@ class HomePage extends StatelessWidget {
                 buttonText: 'Consultez',
                 buttonColor: Colors.blue, // OBLIGATOIRE
                 onButtonPressed: () => {
-                  // action du bouton
+                  CustomToast.warning(
+                    context: context,
+                    title: 'Non disponible',
+                    description: 'Fonctionnalité en cours de développement.',
+                  )
                 },
                 elementOrder: const [
                   CardElementType.title,

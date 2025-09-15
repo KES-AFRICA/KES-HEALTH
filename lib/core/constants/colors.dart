@@ -22,6 +22,7 @@ class AppColors {
   // === COULEURS D'ACCENT ===
   static const Color errorRed = Color(0xFFE7034E);
   static const Color warningYellow = Color(0xFFF2B84B);
+  static const Color successGreen = Color(0xFF28A745);
 
   // === COULEURS UTILITAIRES ===
   static const Color white = Color(0xFFFFFFFF);

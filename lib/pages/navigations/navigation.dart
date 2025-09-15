@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kes_health/pages/accueil/accueil.dart';
 import 'package:kes_health/pages/compte/compte.dart';
@@ -6,14 +7,15 @@ import 'package:kes_health/pages/navigations/components/buildnavItem.dart';
 import 'package:kes_health/pages/rendezvous/rendezvous.dart';
 import 'package:kes_health/pages/sante/sante.dart';
 
-class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({super.key});
+@RoutePage()
+class NavigationPage extends StatefulWidget {
+  const NavigationPage({super.key});
 
   @override
-  State<NavigationScreen> createState() => _NavigationScreenState();
+  State<NavigationPage> createState() => _NavigationPageState();
 }
 
-class _NavigationScreenState extends State<NavigationScreen> {
+class _NavigationPageState extends State<NavigationPage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kes_health/pages/accueil/components/roundedbouton.dart';
+import 'package:kes_health/core/components/roundedbouton.dart';
 
 enum CardElementType { image, title, subtitle, button }
 
@@ -50,7 +50,8 @@ class CallToActionCard extends StatelessWidget {
 
     return Container(
       margin: margin ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: EdgeInsets.only(top: screenWidth*0.1,bottom: screenWidth*0.1),
+      padding:
+          EdgeInsets.only(top: screenWidth * 0.1, bottom: screenWidth * 0.1),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(borderRadius),
@@ -67,7 +68,7 @@ class CallToActionCard extends StatelessWidget {
 
   List<Widget> _buildOrderedElements(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    
+
     Map<CardElementType, Widget> elements = {
       CardElementType.image: _buildImage(screenWidth),
       CardElementType.title: _buildTitle(screenWidth),
@@ -76,14 +77,14 @@ class CallToActionCard extends StatelessWidget {
     };
 
     List<Widget> orderedWidgets = [];
-    
+
     for (int i = 0; i < elementOrder.length; i++) {
       CardElementType elementType = elementOrder[i];
       Widget? element = elements[elementType];
-      
+
       if (element != null) {
         orderedWidgets.add(element);
-        
+
         // Ajouter un espacement entre les éléments (sauf pour le dernier)
         if (i < elementOrder.length - 2) {
           orderedWidgets.add(SizedBox(height: screenWidth * 0.03));
@@ -93,7 +94,7 @@ class CallToActionCard extends StatelessWidget {
         }
       }
     }
-    
+
     return orderedWidgets;
   }
 
@@ -110,34 +111,47 @@ class CallToActionCard extends StatelessWidget {
         ),
       );
     } else if (imageUrl != null && imageUrl!.isNotEmpty) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Image.network(
-          imageUrl!,
-          width: screenWidth*0.5,
-          fit: BoxFit.contain, // Affiche l'image entière sans la couper
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              height: screenWidth * 0.4,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(
-                Icons.image_not_supported,
-                size: screenWidth * 0.1,
-                color: Colors.grey.shade600,
-              ),
-            );
-          },
-        ),
-      );
+      if (imageUrl!.startsWith('http')) {
+        // Image depuis Internet
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.network(
+            imageUrl!,
+            width: screenWidth * 0.5,
+            fit: BoxFit.contain,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                height: screenWidth * 0.4,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.image_not_supported,
+                  size: screenWidth * 0.1,
+                  color: Colors.grey.shade600,
+                ),
+              );
+            },
+          ),
+        );
+      } else {
+        // Image locale (assets)
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.asset(
+            imageUrl!,
+            width: screenWidth * 0.5,
+            fit: BoxFit.contain,
+          ),
+        );
+      }
     } else {
       return const SizedBox.shrink();
     }
   }
-  
+
   Widget _buildTitle(double screenWidth) {
     return Text(
       title,

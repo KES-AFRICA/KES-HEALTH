@@ -1,11 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kes_health/core/constants/colors.dart';
 import 'package:kes_health/core/constants/texte.dart';
+import 'package:kes_health/core/routing/app_router.dart';
 import 'package:kes_health/pages/compte/components/buildconfidentialitysection.dart';
 import 'package:kes_health/pages/compte/components/buildparameterssection.dart';
 import 'package:kes_health/pages/compte/components/infosecucard.dart';
 
+@RoutePage()
 class ComptePage extends StatelessWidget {
   const ComptePage({super.key});
 
@@ -62,7 +65,9 @@ class ComptePage extends StatelessWidget {
                 title: 'Kes Health est au service de votre santé et celle de vos proches',
                 buttonColor: AppColors.primaryBlue,
                 buttonText: 'Se connecter',
-                onButtonPressed: () => {},
+                onButtonPressed: () => {
+                  context.router.push(const AuthRoute())
+                },
               ),
               SizedBox(height: screenHeight * 0.02),
               Row(
@@ -82,6 +87,7 @@ class ComptePage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       // Action à effectuer lors du tap sur "S'inscrire"
+                      context.router.push( const AuthRoute());
                     },
                     child: Text(
                       'S\'inscrire',
