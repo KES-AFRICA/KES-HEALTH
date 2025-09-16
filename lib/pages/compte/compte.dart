@@ -1,16 +1,27 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kes_health/core/components/custom_toast.dart';
 import 'package:kes_health/core/constants/colors.dart';
 import 'package:kes_health/core/constants/texte.dart';
 import 'package:kes_health/core/routing/app_router.dart';
 import 'package:kes_health/pages/compte/components/buildconfidentialitysection.dart';
-import 'package:kes_health/pages/compte/components/buildparameterssection.dart';
+import 'package:kes_health/pages/compte/components/buildconnexionsection.dart';
+import 'package:kes_health/pages/compte/components/buildidentitesection.dart';
+import 'package:kes_health/pages/compte/components/buildparameterssectionauth.dart';
 import 'package:kes_health/pages/compte/components/infosecucard.dart';
 
 @RoutePage()
 class ComptePage extends StatelessWidget {
   const ComptePage({super.key});
+
+      void _showNotAvailableToast(BuildContext context) {
+    CustomToast.warning(
+      context: context,
+      title: 'Non disponible',
+      description: 'Fonctionnalité en cours de développement.',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +33,7 @@ class ComptePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Connexion',
+          'Mon compte',
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
             color: AppColors.white,
@@ -58,59 +69,39 @@ class ComptePage extends StatelessWidget {
           padding: defaultPadding,
           child: Column(
             children: [
-              InfoSecuCard(
+               InfoSecuCard(
                 margin: EdgeInsets.zero,
                 backgroundColor: AppColors.lightBlueBackground,
                 iconSvgPath: 'assets/icons/svg/security.svg',
-                title: 'Kes Health est au service de votre santé et celle de vos proches',
-                buttonColor: AppColors.primaryBlue,
-                buttonText: 'Se connecter',
-                onButtonPressed: () => {
-                  context.router.push(const ConnexionRoute())
-                },
+                title: 'Votre compte est sécurisé et vos données sont protégées',
+                titleColor: AppColors.black.withOpacity(0.75),
               ),
+              // IdentiteSection
               SizedBox(height: screenHeight * 0.02),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Vous n\'avez pas de compte ?',
-                    style: GoogleFonts.poppins(
-                      color: AppColors.darkBlue,
-                      fontSize: screenWidth * 0.03,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    textAlign: TextAlign.start,
-                  ),
-                  SizedBox(width: screenWidth * 0.02),
-                  GestureDetector(
-                    onTap: () {
-                      context.router.push(const InscriptionRoute());
-                    },
-                    child: Text(
-                      'S\'inscrire',
-                      style: GoogleFonts.poppins(
-                        color: AppColors.primaryBlue,
-                        fontSize: screenWidth * 0.035,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
-              ),
-              
+              buildIdentiteSection(context, screenWidth),
+              // ConnexionSection
+              SizedBox(height: screenHeight * 0.02),
+              buildConnexionSection(context, screenWidth),
               // ParametersSection
-              SizedBox(height: screenHeight * 0.04),
-              buildParametersSection(context, screenWidth),
-              
+              SizedBox(height: screenHeight * 0.03),
+              buildParametersSectionAuth(context, screenWidth),
               // ConfidentialitySection
               SizedBox(height: screenHeight * 0.03),
               buildConfidentialitySection(context, screenWidth),
+              SizedBox(height: screenHeight * 0.03),
+              GestureDetector(
+                onTap: () => _showNotAvailableToast(context),
+                child: InfoSecuCard(
+                  margin: EdgeInsets.zero,
+                  backgroundColor: AppColors.errorRed.withOpacity(0.1),
+                  iconSvgPath: 'assets/icons/svg/logout.svg',
+                  title: 'Déconnexion',
+                  titleColor: AppColors.errorRed,
+                ),
+              ),
               
               // Version
-              SizedBox(height: screenHeight * 0.04),
+              SizedBox(height: screenHeight * 0.03),
               Text(
                 AppTexts.version,
                 style: GoogleFonts.poppins(
@@ -127,3 +118,132 @@ class ComptePage extends StatelessWidget {
     );
   }
 }
+// import 'package:auto_route/auto_route.dart';
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:kes_health/core/constants/colors.dart';
+// import 'package:kes_health/core/constants/texte.dart';
+// import 'package:kes_health/core/routing/app_router.dart';
+// import 'package:kes_health/pages/compte/components/buildconfidentialitysection.dart';
+// import 'package:kes_health/pages/compte/components/buildparameterssection.dart';
+// import 'package:kes_health/pages/compte/components/infosecucard.dart';
+
+// @RoutePage()
+// class ComptePage extends StatelessWidget {
+//   const ComptePage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final screenWidth = MediaQuery.of(context).size.width;
+//     final screenHeight = MediaQuery.of(context).size.height; // Correction: height au lieu de width
+//     final defaultPadding = EdgeInsets.all(screenWidth * 0.04);
+
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       appBar: AppBar(
+//         title: Text(
+//           'Connexion',
+//           style: GoogleFonts.poppins(
+//             fontWeight: FontWeight.w600,
+//             color: AppColors.white,
+//           ),
+//         ),
+//         backgroundColor: AppColors.primaryBlue,
+//         elevation: 0,
+//         foregroundColor: AppColors.primaryBlue,
+//         actions: [
+//           GestureDetector(
+//             onTap: () {
+//               context.router.push(const ConnexionRoute());
+//             },
+//             child: Row(
+//               children: [
+//                 const Icon(Icons.info_outline, color: AppColors.white),
+//                 const SizedBox(width: 6),
+//                 Text(
+//                   'Aide',
+//                   style: GoogleFonts.poppins(
+//                     color: AppColors.white,
+//                     fontWeight: FontWeight.w500,
+//                   ),
+//                 ),
+//                 const SizedBox(width: 12),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//       body: SingleChildScrollView(
+//         child: Container(
+//           padding: defaultPadding,
+//           child: Column(
+//             children: [
+//               InfoSecuCard(
+//                 margin: EdgeInsets.zero,
+//                 backgroundColor: AppColors.lightBlueBackground,
+//                 iconSvgPath: 'assets/icons/svg/security.svg',
+//                 title: 'Kes Health est au service de votre santé et celle de vos proches',
+//                 buttonColor: AppColors.primaryBlue,
+//                 buttonText: 'Se connecter',
+//                 onButtonPressed: () => {
+//                   context.router.push(const ConnexionRoute())
+//                 },
+//               ),
+//               SizedBox(height: screenHeight * 0.02),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.start,
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//                   Text(
+//                     'Vous n\'avez pas de compte ?',
+//                     style: GoogleFonts.poppins(
+//                       color: AppColors.darkBlue,
+//                       fontSize: screenWidth * 0.03,
+//                       fontWeight: FontWeight.w500,
+//                     ),
+//                     textAlign: TextAlign.start,
+//                   ),
+//                   SizedBox(width: screenWidth * 0.02),
+//                   GestureDetector(
+//                     onTap: () {
+//                       context.router.push(const InscriptionRoute());
+//                     },
+//                     child: Text(
+//                       'S\'inscrire',
+//                       style: GoogleFonts.poppins(
+//                         color: AppColors.primaryBlue,
+//                         fontSize: screenWidth * 0.035,
+//                         fontWeight: FontWeight.w600,
+//                       ),
+//                       textAlign: TextAlign.start,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+              
+//               // ParametersSection
+//               SizedBox(height: screenHeight * 0.04),
+//               buildParametersSection(context, screenWidth),
+              
+//               // ConfidentialitySection
+//               SizedBox(height: screenHeight * 0.03),
+//               buildConfidentialitySection(context, screenWidth),
+              
+//               // Version
+//               SizedBox(height: screenHeight * 0.04),
+//               Text(
+//                 AppTexts.version,
+//                 style: GoogleFonts.poppins(
+//                   color: Colors.grey.shade600,
+//                   fontSize: screenWidth * 0.035,
+//                   fontWeight: FontWeight.w400,
+//                 ),
+//               ),
+//               SizedBox(height: screenHeight * 0.02),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

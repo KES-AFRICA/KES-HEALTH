@@ -43,7 +43,7 @@ class InfoCard extends StatelessWidget {
           child: Text(
             title,
             style: GoogleFonts.poppins(
-              color: AppColors.darkBlue,
+              color: AppColors.black.withOpacity(0.75),
               fontSize: screenWidth * 0.04,
               fontWeight: FontWeight.w700,
               height: 1.4,
@@ -60,7 +60,7 @@ class InfoCard extends StatelessWidget {
           child: Text(
             subtitle,
             style: GoogleFonts.poppins(
-              color: AppColors.darkBlue,
+              color: Colors.grey.shade600,
               fontSize: screenWidth * 0.035,
               fontWeight: FontWeight.w500,
               height: 1.4,

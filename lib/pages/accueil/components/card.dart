@@ -30,7 +30,7 @@ import 'package:kes_health/core/constants/colors.dart';
               child: Text(
                 title,
                 style: GoogleFonts.poppins(
-                  color: AppColors.textPrimary,
+                  color: AppColors.black.withOpacity(0.75),
                   fontWeight: FontWeight.w600,
                   fontSize: screenWidth * 0.030,
                   height: 1.3,

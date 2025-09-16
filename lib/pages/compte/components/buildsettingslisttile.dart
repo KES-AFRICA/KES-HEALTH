@@ -20,7 +20,7 @@ Widget buildSettingsListTile({
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(
           horizontal: screenWidth * 0.01,
-          vertical: screenWidth * 0.005,
+          vertical: screenWidth * 0.001,
         ),
         leading: Container(
           width: 40,
@@ -38,7 +38,7 @@ Widget buildSettingsListTile({
         title: Text(
           title,
           style: GoogleFonts.poppins(
-            color: AppColors.darkBlue,
+            color: AppColors.black.withOpacity(0.75),
             fontSize: screenWidth * 0.04,
             fontWeight: FontWeight.w600,
           ),

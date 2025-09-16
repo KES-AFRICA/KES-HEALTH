@@ -7,11 +7,12 @@ class AppColors {
   AppColors._();
 
   // === COULEURS PRINCIPALES ===
-  static const Color primaryBlue = Color(0xFF0F7ACC);
-  static const Color secondaryBlue = Color(0xFF00C2FF);
-  static const Color lightBlue = Color(0xFF05C7F2);
-  static const Color darkBlue = Color(0xFF023059);
-  static const Color accentBlue = Color(0xFF117DBF);
+
+ static const Color primaryBlue = Color(0xFF00bfa5);      // #27B7B7
+  static const Color secondaryBlue = Color(0xFFC2EDE9);    // #C2EDE9
+  static const Color lightBlue = Color(0xFFC0F1EC);        // #C0F1EC
+  static const Color darkBlue = Color(0xFF009688);       // Nuance plus foncée de #27B7B7
+  static const Color accentBlue = Color(0xFF5AC8C2);       // Nuance intermédiaire
 
   // === COULEURS DE FOND ===
   static const Color lightBlueBackground = Color(0xFFE7F4FC);

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:kes_health/pages/accueil/accueil.dart';
 import 'package:kes_health/pages/compte/compte.dart';
 import 'package:kes_health/pages/messages/messages.dart';
-import 'package:kes_health/pages/navigations/components/buildnavItem.dart';
 import 'package:kes_health/pages/rendezvous/rendezvous.dart';
 import 'package:kes_health/pages/sante/sante.dart';
+import 'package:kes_health/core/constants/colors.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 @RoutePage()
 class NavigationPage extends StatefulWidget {
@@ -26,48 +27,67 @@ class _NavigationPageState extends State<NavigationPage> {
     const ComptePage(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        child: _pages[_selectedIndex],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedFontSize: 0,
-        unselectedFontSize: 0,
-        items: [
-          BottomNavigationBarItem(
-            icon: buildNavItem(Icons.home, "Accueil", 0,_selectedIndex),
-             label: '',
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+            ),
+          ],
+        ),
+  child: SingleChildScrollView( // Ajout du scroll horizontal
+    scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: GNav(
+              haptic: true, // feedback haptique
+              tabBorderRadius: 35,
+              curve: Curves.easeOutExpo,
+              duration: const Duration(milliseconds: 300),
+              gap: 2,
+              color: AppColors.darkBlue, // couleur des icônes inactives
+              activeColor: Colors.white, // couleur des icônes et texte actifs
+              iconSize: 24,
+              tabBackgroundColor: AppColors.darkBlue, // fond des onglets actifs
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              tabs: const [
+                GButton(
+                  icon: Icons.home,
+                  text: 'Accueil',
+                ),
+                GButton(
+                  icon: Icons.calendar_today,
+                  text: 'Rendez-vous',
+                ),
+                GButton(
+                  icon: Icons.local_hospital,
+                  text: 'Santé',
+                ),
+                GButton(
+                  icon: Icons.mail,
+                  text: 'Messages',
+                ),
+                GButton(
+                  icon: Icons.person,
+                  text: 'Compte',
+                ),
+              ],
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: buildNavItem(Icons.calendar_today, "Rendez-vous", 1,_selectedIndex),
-             label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: buildNavItem(Icons.local_hospital, "Santé", 2,_selectedIndex),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: buildNavItem(Icons.mail, "Messages", 3,_selectedIndex),
-             label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: buildNavItem(Icons.person, "Compte", 4,_selectedIndex),
-            label: '',
-          ),
-        ],
+        ),
       ),
     );
   }

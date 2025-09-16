@@ -49,7 +49,7 @@ class _EmailStepComponentState extends State<EmailStepComponent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Saisissez votre adresse email ou votre numéro de téléphone',
+            'Saisissez votre adresse email',
             style: GoogleFonts.poppins(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class _EmailStepComponentState extends State<EmailStepComponent> {
           ),
           const SizedBox(height: 24),
           Text(
-            'Adresse e-mail ou numéro de téléphone',
+            'Adresse e-mail',
             style: GoogleFonts.poppins(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -69,7 +69,7 @@ class _EmailStepComponentState extends State<EmailStepComponent> {
           TextFormField(
             controller: widget.controller,
             decoration: InputDecoration(
-              hintText: 'Ex : nom@email.com ou 655 123 456',
+              hintText: 'Ex : nom@email.com',
               hintStyle: GoogleFonts.poppins(
                 color: AppColors.textSecondary,
               ),
@@ -112,7 +112,7 @@ class _EmailStepComponentState extends State<EmailStepComponent> {
           if (_hasError) ...[
             const SizedBox(height: 8),
             Text(
-              'Veuillez saisir une adresse email ou un numéro de téléphone valide',
+              'Veuillez saisir une adresse email valide',
               style: GoogleFonts.poppins(
                 color: Colors.red,
                 fontSize: 14,

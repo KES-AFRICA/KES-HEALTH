@@ -8,6 +8,7 @@ import 'package:kes_health/pages/compte/compte.dart';
 import 'package:kes_health/pages/messages/messages.dart';
 import 'package:kes_health/pages/navigations/navigation.dart';
 import 'package:kes_health/pages/rendezvous/rendezvous.dart';
+import 'package:kes_health/pages/sante/historique-sante/historique-sante.dart';
 import 'package:kes_health/pages/sante/sante.dart';
 
 part 'app_router.gr.dart';
@@ -26,5 +27,6 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: SanteRoute.page),
     AutoRoute(page: InscriptionRoute.page),
     AutoRoute(page: ConnexionRoute.page),
+    AutoRoute(page: RappelsSanteListRoute.page),
   ];
 }

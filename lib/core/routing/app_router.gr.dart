@@ -63,6 +63,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const NavigationPage(),
       );
     },
+    RappelsSanteListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RappelsSanteListPage(),
+      );
+    },
     RendezVousRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -186,6 +192,20 @@ class NavigationRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'NavigationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RappelsSanteListPage]
+class RappelsSanteListRoute extends PageRouteInfo<void> {
+  const RappelsSanteListRoute({List<PageRouteInfo>? children})
+      : super(
+          RappelsSanteListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RappelsSanteListRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

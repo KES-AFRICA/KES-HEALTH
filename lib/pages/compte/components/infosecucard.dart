@@ -8,9 +8,9 @@ class InfoSecuCard extends StatelessWidget {
   final Color backgroundColor;
   final String iconSvgPath;
   final String title;
-  final Color buttonColor;
-  final String buttonText;
-  final VoidCallback onButtonPressed;
+  final Color? buttonColor;
+  final String? buttonText;
+  final VoidCallback? onButtonPressed;
   final double borderRadius;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
@@ -22,9 +22,9 @@ class InfoSecuCard extends StatelessWidget {
     required this.backgroundColor,
     required this.iconSvgPath,
     required this.title,
-    required this.buttonColor,
-    required this.buttonText,
-    required this.onButtonPressed,
+     this.buttonColor,
+     this.buttonText,
+     this.onButtonPressed,
     this.borderRadius = 6.0,
     this.padding,
     this.margin,
@@ -71,16 +71,16 @@ class InfoSecuCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: screenWidth * 0.04),
+            buttonText!=null ? SizedBox(height: screenWidth * 0.04):const SizedBox(),
             // Bouton qui prend toute la largeur
-            SizedBox(
+            buttonText!=null ? SizedBox(
               width: double.infinity,
               child: RoundedButton(
-                text: buttonText,
-                color: buttonColor,
-                onPressed: onButtonPressed,
+                text: buttonText!,
+                color: buttonColor!,
+                onPressed: onButtonPressed!,
               ),
-            ),
+            ):const SizedBox(),
           ],
         ),
       ),
